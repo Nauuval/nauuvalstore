@@ -7,6 +7,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/header-styles.css">
+<link rel="stylesheet" href="assets/header-styles.css">
 <style>
   :root{
     --void: #08080A;
@@ -314,6 +316,104 @@
     .nav-links a{ padding: 12px 0; width:100%; border-bottom: 1px solid var(--line); }
     .nav-links .nav-cta{ margin-top: 12px; text-align:center; border-bottom:none; }
   }
+
+  /* Mobile Improvements */
+  @media (max-width: 768px){
+    header .nav{
+      padding: 12px 16px;
+    }
+    .brand{
+      font-size: 1rem;
+    }
+    .brand-mark{
+      width: 32px;
+      height: 32px;
+    }
+    .nav-links{
+      gap: 0;
+    }
+    .nav-links a{
+      font-size: 0.85rem;
+      padding: 10px 0;
+    }
+    .nav-cta{
+      margin-top: 8px;
+      padding: 8px 16px;
+      font-size: 0.85rem;
+    }
+    
+    .katalog-hero{
+      padding: 60px 0 30px;
+    }
+    .katalog-hero h1{
+      font-size: 1.75rem;
+    }
+    .katalog-hero p{
+      font-size: 1rem;
+    }
+    .live-indicator{
+      font-size: 0.85rem;
+      padding: 6px 12px;
+    }
+    
+    .filter-section{
+      padding: 24px 0;
+    }
+    .filter-tabs{
+      gap: 8px;
+    }
+    .filter-btn{
+      padding: 10px 16px;
+      font-size: 0.85rem;
+    }
+    .filter-btn img{
+      height: 16px;
+      margin-right: 6px;
+    }
+    
+    .products-section{
+      padding: 40px 0 60px;
+    }
+    .products-grid{
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .product-card{
+      padding: 16px;
+    }
+    .product-name{
+      font-size: 1.1rem;
+    }
+    .product-price{
+      font-size: 1.4rem;
+    }
+    .btn-order{
+      padding: 12px;
+      font-size: 0.9rem;
+    }
+  }
+  
+  /* Header improvements */
+  header{
+    border-bottom: 1px solid var(--line);
+  }
+  .nav{
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+  .brand:hover{
+    opacity: 0.9;
+  }
+  .nav-cta{
+    white-space: nowrap;
+  }
+  
+  /* Loading state */
+  .loading{
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--ash);
+  }
 </style>
 </head>
 <body>
@@ -324,6 +424,7 @@
       <img src="assets/logo.png" alt="Logo Nauuvalstore" class="brand-mark">
       Nauuvalstore
     </a>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu" aria-expanded="false"><svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg></button>
     <div class="nav-links" id="navLinks">
       <a href="index.html">Beranda</a>
       <a href="katalog.html">Katalog</a>
@@ -382,8 +483,31 @@
   }, 1000);
 </script>
 
-</body>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const navLinks = document.getElementById('navLinks');
+  if(menuBtn && navLinks){
+    menuBtn.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', isOpen);
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+</script>
+<script src="assets/header-script.js"></script>`n</body>
 </html>
+
+
+
+
+
+
 
 
 
