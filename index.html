@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nauuvalstore — Joki & Kebutuhan Fisch dan Blox Fruits</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --void: #08080A;
+    --panel: #131316;
+    --panel-2: #1B1B1F;
+    --bone: #F2F2F0;
+    --ash: #8B8B93;
+    --ash-dim: #5C5C63;
+    --line: #2A2A2F;
+    --radius-lg: 22px;
+    --radius-md: 14px;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--void);
+    color: var(--bone);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    background-image:
+      radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.35) 0, transparent 100%),
+      radial-gradient(1px 1px at 70% 15%, rgba(255,255,255,0.25) 0, transparent 100%),
+      radial-gradient(1.5px 1.5px at 85% 60%, rgba(255,255,255,0.3) 0, transparent 100%),
+      radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,0.2) 0, transparent 100%),
+      radial-gradient(1px 1px at 10% 65%, rgba(255,255,255,0.25) 0, transparent 100%),
+      radial-gradient(1.5px 1.5px at 60% 45%, rgba(255,255,255,0.18) 0, transparent 100%);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+  h1,h2,h3{
+    font-family: 'Sora', sans-serif;
+    color: var(--bone);
+    margin: 0;
+    line-height: 1.15;
+  }
+  p{ margin: 0; }
+  a{ color: inherit; text-decoration: none; }
+  img,svg{ display:block; max-width:100%; }
+  .wrap{
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  section{ position: relative; }
+
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--bone);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; }
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(8, 8, 10, 0.75);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    padding: 16px 24px;
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Sora', sans-serif;
+    font-weight:700;
+    font-size: 1.1rem;
+    color: var(--bone);
+  }
+  .brand-mark{
+    flex-shrink:0;
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    object-fit: cover;
+    border: 1px solid var(--line);
+  }
+  .brand-text{ display:flex; flex-direction:column; line-height:1.15; }
+  .brand-tagline{
+    font-family:'Inter', sans-serif;
+    font-weight:600;
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+    color: var(--ash);
+  }
+  @media (max-width: 500px){ .brand-tagline{ display:none; } }
+  .nav-links{
+    display:flex;
+    gap: 28px;
+    align-items:center;
+  }
+  .nav-links a{
+    font-weight:600;
+    font-size: 0.92rem;
+    color: var(--ash);
+    transition: color .15s ease;
+  }
+  .nav-links a:hover{ color: var(--bone); }
+  .nav-cta{
+    background: var(--bone);
+    color: #0A0A0C !important;
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-weight:700;
+    font-size: 0.88rem;
+    white-space: nowrap;
+  }
+  .nav-cta:hover{ background: #D8D8D6; }
+  .menu-btn{
+    display:none;
+    background:none;
+    border:none;
+    cursor:pointer;
+    padding: 6px;
+  }
+
+  @media (max-width: 860px){
+    .nav-links{
+      position:absolute;
+      top:100%;
+      left:0; right:0;
+      background: var(--void);
+      border-bottom: 1px solid var(--line);
+      flex-direction:column;
+      align-items:flex-start;
+      gap: 0;
+      padding: 8px 24px 20px;
+      display:none;
+    }
+    .nav-links.open{ display:flex; }
+    .nav-links a{ padding: 12px 0; width:100%; border-bottom: 1px solid var(--line); }
+    .nav-links .nav-cta{ margin-top: 12px; text-align:center; border-bottom:none; }
+    .menu-btn{ display:block; }
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding: 88px 0 40px;
+    overflow: hidden;
+    text-align:center;
+  }
+  .hero .wrap{ position:relative; }
+  .singularity{
+    position:absolute;
+    top: -140px;
+    left:50%;
+    transform: translateX(-50%);
+    width: min(720px, 130vw);
+    z-index:0;
+    pointer-events:none;
+  }
+  .ring{ transform-origin: 300px 300px; }
+  .ring-1{ animation: spin 40s linear infinite; }
+  .ring-2{ animation: spin 60s linear infinite reverse; }
+  .ring-3{ animation: spin 90s linear infinite; }
+  @keyframes spin{
+    from{ transform: rotate(0deg); }
+    to{ transform: rotate(360deg); }
+  }
+
+  .hero-content{ position:relative; z-index:1; }
+  .kicker{
+    display:inline-block;
+    color: var(--ash);
+    border: 1px solid var(--line);
+    padding: 7px 16px;
+    border-radius: 999px;
+    font-weight:700;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    margin-bottom: 26px;
+  }
+  .hero-content h1{
+    font-size: clamp(2.2rem, 5vw, 3.4rem);
+    font-weight: 800;
+    margin: 0 auto 20px;
+    max-width: 18ch;
+  }
+  .hero-content p.lede{
+    color: var(--ash);
+    font-size: 1.08rem;
+    max-width: 46ch;
+    margin: 0 auto 32px;
+  }
+  .btn-row{
+    display:flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    justify-content:center;
+    margin-bottom: 40px;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding: 14px 26px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.96rem;
+    border: 1px solid transparent;
+    cursor:pointer;
+  }
+  .btn-primary{
+    background: var(--bone);
+    color: #0A0A0C;
+  }
+  .btn-primary:hover{ background: #D8D8D6; }
+  .btn-ghost{
+    background: transparent;
+    color: var(--bone);
+    border-color: var(--line);
+  }
+  .btn-ghost:hover{ border-color: var(--ash); }
+
+  /* Game badge row */
+  .game-row{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap: 18px;
+    flex-wrap:wrap;
+  }
+  .game-row .label{
+    color: var(--ash-dim);
+    font-size: 0.85rem;
+    font-weight:600;
+  }
+  .game-chip{
+    display:flex;
+    align-items:center;
+    gap: 10px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 8px 18px 8px 10px;
+  }
+  .game-chip img{
+    height: 26px;
+    width:auto;
+    border-radius: 6px;
+  }
+  .game-chip.dark-logo img{ background:#000; padding:3px; border-radius:6px; }
+  .game-chip span{
+    font-weight:700;
+    font-size: 0.88rem;
+    color: var(--bone);
+  }
+
+  /* stat strip */
+  .stats{
+    display:flex;
+    justify-content:center;
+    gap: 56px;
+    flex-wrap:wrap;
+    margin-top: 56px;
+    padding-top: 40px;
+    border-top: 1px solid var(--line);
+  }
+  .stat b{
+    display:block;
+    font-family:'Sora',sans-serif;
+    font-size: 1.7rem;
+    font-weight:800;
+  }
+  .stat span{
+    color: var(--ash);
+    font-size: 0.85rem;
+  }
+
+  /* ---------- Section headings ---------- */
+  .section-head{
+    max-width: 56ch;
+    margin-bottom: 40px;
+  }
+  .section-head h2{
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    font-weight: 800;
+    margin-bottom: 12px;
+  }
+  .section-head p{
+    color: var(--ash);
+    font-size: 1.02rem;
+  }
+  .center{ text-align:center; margin-left:auto; margin-right:auto; }
+
+  /* ---------- Services ---------- */
+  .services{ padding: 60px 0 20px; }
+  .service-grid{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .service-card{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    display:flex;
+    flex-direction:column;
+    gap: 14px;
+    transition: border-color .18s ease, transform .18s ease, background .18s ease;
+  }
+  .service-card:hover{
+    border-color: var(--ash-dim);
+    background: var(--panel-2);
+    transform: translateY(-3px);
+  }
+  .service-card:hover .service-arrow{ color: var(--bone); }
+  .service-top{
+    display:flex;
+    align-items:center;
+  }
+  .service-logo{
+    height: 40px;
+    width:auto;
+    max-width: 150px;
+    object-fit: contain;
+  }
+  .service-logo.dark{
+    background:#000;
+    padding: 8px 12px;
+    border-radius: 10px;
+  }
+  .service-card h3{
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+  .service-card p{
+    color: var(--ash);
+    font-size: 0.96rem;
+  }
+  .service-tag{
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--ash-dim);
+  }
+  .service-cta{
+    margin-top:auto;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 12px;
+    flex-wrap:wrap;
+  }
+  .service-arrow{
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--ash);
+    transition: color .18s ease;
+  }
+
+  @media (max-width: 700px){
+    .service-grid{ grid-template-columns: 1fr; }
+  }
+
+  /* ---------- Steps ---------- */
+  .steps{ padding: 60px 0; }
+  .step-list{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    position:relative;
+  }
+  .step-list::before{
+    content:"";
+    position:absolute;
+    top: 22px;
+    left: 8%;
+    right: 8%;
+    height: 1px;
+    background: var(--line);
+  }
+  .step{ position:relative; }
+  .step-num{
+    width: 44px; height:44px;
+    border-radius:50%;
+    background: var(--bone);
+    color:#0A0A0C;
+    font-family:'Sora',sans-serif;
+    font-weight:700;
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom: 16px;
+    position:relative;
+    z-index:1;
+  }
+  .step h3{
+    font-size: 1.02rem;
+    font-weight:700;
+    margin-bottom: 8px;
+  }
+  .step p{
+    color: var(--ash);
+    font-size: 0.92rem;
+  }
+
+  @media (max-width: 860px){
+    .step-list{ grid-template-columns: 1fr; gap: 28px; }
+    .step-list::before{ display:none; }
+  }
+
+  /* ---------- Testimoni ---------- */
+  .testimoni{ padding: 20px 0 60px; }
+  .testi-grid{
+    display:grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+  .testi-card{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 10px;
+  }
+  .testi-card img{
+    width: 100%;
+    border-radius: 10px;
+    display:block;
+  }
+  .testi-card span{
+    display:block;
+    text-align:center;
+    font-size: 0.8rem;
+    font-weight:600;
+    color: var(--ash);
+    padding-top: 8px;
+  }
+  @media (max-width: 860px){
+    .testi-grid{ grid-template-columns: repeat(2, 1fr); }
+  }
+  .testi-more{
+    text-align:center;
+    margin-top: 32px;
+  }
+  .testi-more p{
+    color: var(--ash);
+    font-size: 0.94rem;
+    margin-bottom: 18px;
+  }
+
+  /* ---------- Ring divider ---------- */
+  .ring-divider{
+    display:flex;
+    justify-content:center;
+    padding: 20px 0 0;
+    opacity: 0.6;
+  }
+
+  /* ---------- Community band ---------- */
+  .community{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    color: var(--bone);
+    padding: 48px;
+    margin: 20px auto 80px;
+    display:grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 32px;
+    align-items:center;
+    overflow:hidden;
+    position:relative;
+  }
+  .community h2{
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight:800;
+    margin-bottom: 14px;
+  }
+  .community p{
+    color: var(--ash);
+    font-size: 1rem;
+    max-width: 46ch;
+    margin-bottom: 22px;
+  }
+  .community-badge{
+    background: var(--panel-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 22px;
+    display:flex;
+    flex-direction:column;
+    gap: 10px;
+  }
+  .community-badge .big{
+    font-family:'Sora',sans-serif;
+    font-size: 1.8rem;
+    font-weight:800;
+  }
+  .community-badge small{
+    color: var(--ash);
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 860px){
+    .community{ grid-template-columns: 1fr; padding: 32px 24px; }
+  }
+
+  /* ---------- Support / Donasi ---------- */
+  .support{
+    text-align:center;
+    max-width: 640px;
+    margin: 0 auto 80px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 48px 32px;
+    position:relative;
+  }
+  .support-icon{
+    width: 56px; height:56px;
+    border-radius:50%;
+    background: var(--panel-2);
+    border: 1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    margin: 0 auto 22px;
+  }
+  .support h2{
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-weight: 800;
+    margin-bottom: 12px;
+  }
+  .support p{
+    color: var(--ash);
+    max-width: 44ch;
+    margin: 0 auto 26px;
+    font-size: 0.98rem;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    background: var(--void);
+    border-top: 1px solid var(--line);
+    color: var(--ash);
+    padding: 48px 0 24px;
+  }
+  .footer-grid{
+    display:grid;
+    grid-template-columns: 1.4fr 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 32px;
+  }
+  .footer-brand{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Sora',sans-serif;
+    font-weight:700;
+    color: var(--bone);
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+  }
+  .footer-grid p{ font-size: 0.92rem; max-width: 34ch; color: var(--ash-dim); }
+  .footer-col h4{
+    color: var(--bone);
+    font-size: 0.9rem;
+    font-weight:700;
+    margin-bottom: 14px;
+  }
+  .footer-col a{
+    display:block;
+    font-size: 0.9rem;
+    color: var(--ash-dim);
+    padding: 6px 0;
+  }
+  .footer-col a:hover{ color: var(--bone); }
+  .footer-bottom{
+    border-top: 1px solid var(--line);
+    padding-top: 20px;
+    font-size: 0.8rem;
+    color: var(--ash-dim);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap: 10px;
+  }
+
+  @media (max-width: 700px){
+    .footer-grid{ grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="nav wrap">
+    <div class="brand">
+      <img class="brand-mark" src="assets/logo.png" alt="Logo Nauuvalstore">
+      <div class="brand-text">
+        Nauuvalstore
+        <span class="brand-tagline">TERMURAH · TERCEPAT · TERPERCAYA</span>
+      </div>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Buka menu" aria-expanded="false">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="#F2F2F0" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="#layanan">Layanan</a><a href="katalog.html">Katalog</a>
+      <a href="#cara">Cara Pesan</a>
+      <a href="#testimoni">Testimoni</a>
+      <a href="#komunitas">Komunitas</a>
+      <a href="#dukungan">Dukungan</a>
+      <a href="#kontak">Kontak</a>
+      <a class="nav-cta" href="https://wa.me/6289529834425" target="_blank" rel="noopener">Order Sekarang</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+
+      <svg class="singularity" viewBox="0 0 600 600" aria-hidden="true">
+        <defs>
+          <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#ffffff" stop-opacity="0.28"/>
+            <stop offset="55%" stop-color="#ffffff" stop-opacity="0.05"/>
+            <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle cx="300" cy="300" r="280" fill="url(#glow)"/>
+        <circle cx="300" cy="300" r="70" fill="#000"/>
+        <g class="ring ring-1">
+          <ellipse cx="300" cy="300" rx="230" ry="90" fill="none" stroke="#F2F2F0" stroke-opacity="0.5" stroke-width="1.4"/>
+        </g>
+        <g class="ring ring-2">
+          <ellipse cx="300" cy="300" rx="190" ry="70" fill="none" stroke="#F2F2F0" stroke-opacity="0.35" stroke-width="1.2"/>
+        </g>
+        <g class="ring ring-3">
+          <ellipse cx="300" cy="300" rx="150" ry="150" fill="none" stroke="#F2F2F0" stroke-opacity="0.22" stroke-width="1"/>
+        </g>
+      </svg>
+
+      <div class="hero-content">
+        <span class="kicker">TERMURAH · TERCEPAT · TERPERCAYA</span>
+        <h1>Progress akun kamu, biar kami yang tarik masuk</h1>
+        <p class="lede">Nauuvalstore bantu joki level dan grinding Blox Fruits & Fisch, sampai kebutuhan in-game lainnya. Kerja cepat, harga jelas dari awal, tanpa drama.</p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="https://wa.me/6289529834425" target="_blank" rel="noopener">Chat via WhatsApp</a>
+          <a class="btn btn-ghost" href="#layanan">Lihat semua layanan</a>
+        </div>
+
+        <div class="game-row">
+          <span class="label">Melayani pemain:</span>
+          <div class="game-chip">
+            <img src="assets/bloxfruits-logo.png" alt="Blox Fruits">
+            <span>Blox Fruits</span>
+          </div>
+          <div class="game-chip dark-logo">
+            <img src="assets/fisch-logo.png" alt="Fisch">
+            <span>Fisch</span>
+          </div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><b>2</b><span>Game dilayani</span></div>
+          <div class="stat"><b>100+</b><span>Transaksi selesai</span></div>
+          <div class="stat"><b>24/7</b><span>Respon cepat</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="steps" id="cara">
+    <div class="wrap">
+      <div class="section-head center">
+        <h2>Cara pesan, cuma 4 langkah</h2>
+        <p>Nggak perlu ribet daftar akun atau isi form panjang.</p>
+      </div>
+      <div class="step-list">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Pilih layanan</h3>
+          <p>Tentukan joki atau kebutuhan item yang kamu perlukan.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Chat & konfirmasi</h3>
+          <p>Hubungi kami di WhatsApp untuk detail pesanan dan harga.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Pembayaran</h3>
+          <p>Transfer sesuai kesepakatan, jelas dan tanpa biaya tersembunyi.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h3>Pesanan dikerjakan</h3>
+          <p>Tim kami langsung kerjakan pesanan sampai selesai.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONI -->
+  
+  <!-- KATALOG & CTA -->
+  <section class="wrap" style="padding: 80px 0; text-align: center;">
+    <h2 style="font-size: 2em; margin-bottom: 16px; font-family: 'Sora', sans-serif;">Lihat Katalog Lengkap</h2>
+    <p style="color: var(--ash); font-size: 1.1em; margin-bottom: 30px;">Joki dan kebutuhan Blox Fruits & Fisch dengan stok live terbaru</p>
+    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+      <a href="katalog.html" style="background: var(--bone); color: var(--void); padding: 14px 32px; border-radius: 12px; font-weight: 700; text-decoration: none; transition: all .2s; display: inline-block;">Buka Katalog Produk</a>
+      <a href="https://wa.me/6289529834425" target="_blank" rel="noopener" style="background: transparent; color: var(--bone); border: 1px solid var(--line); padding: 14px 32px; border-radius: 12px; font-weight: 700; text-decoration: none; transition: all .2s; display: inline-block;">Hubungi Admin</a>
+    </div>
+  </section>
+<section class="testimoni" id="testimoni">
+    <div class="wrap">
+      <div class="section-head center">
+        <h2>Bukti pembayaran dari pembeli</h2>
+        <p>Beberapa bukti transaksi asli yang sudah masuk. Semua diproses dan diselesaikan sesuai kesepakatan.</p>
+      </div>
+      <div class="testi-grid">
+        <div class="testi-card">
+          <img src="assets/bukti-1.png" alt="Bukti pembayaran Rp406.000 via DANA">
+          <span>DANA · Rp406.000</span>
+        </div>
+        <div class="testi-card">
+          <img src="assets/bukti-2.png" alt="Bukti pembayaran Rp160.000">
+          <span>Rp160.000</span>
+        </div>
+        <div class="testi-card">
+          <img src="assets/bukti-3.png" alt="Bukti pembayaran Rp200.000 via GoPay">
+          <span>GoPay · Rp200.000</span>
+        </div>
+        <div class="testi-card">
+          <img src="assets/bukti-4.png" alt="Bukti pembayaran Rp110.000 via GoPay">
+          <span>GoPay · Rp110.000</span>
+        </div>
+      </div>
+      <div class="testi-more">
+        <p>Ada lebih banyak bukti transaksi dan info stok terbaru di saluran WhatsApp kami.</p>
+        <a class="btn btn-ghost" href="https://whatsapp.com/channel/0029VaCkSYa8kyyHJQBMtX1K" target="_blank" rel="noopener">Lihat testimoni lainnya di saluran WA</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="ring-divider" aria-hidden="true">
+    <svg width="120" height="30" viewBox="0 0 120 30">
+      <ellipse cx="60" cy="15" rx="55" ry="8" fill="none" stroke="#2A2A2F" stroke-width="1.5"/>
+    </svg>
+  </div>
+
+  <!-- COMMUNITY -->
+  <section class="wrap" id="komunitas">
+    <div class="community">
+      <div>
+        <h2>Gabung komunitas jual beli Fisch</h2>
+        <p>Selain joki dan item, kami juga punya grup WhatsApp khusus buat pemain Fisch yang mau jual beli barang langsung sesama member — cari barang langka, diskusi harga, atau lepas stok kamu sendiri.</p>
+        <div class="btn-row" style="justify-content:flex-start; margin-bottom:0;">
+          <a class="btn btn-primary" href="https://chat.whatsapp.com/L7OwrxjkWHoIyF4dE4O3Zf" target="_blank" rel="noopener">Gabung grup WhatsApp</a>
+          <a class="btn btn-ghost" href="https://whatsapp.com/channel/0029VaCkSYa8kyyHJQBMtX1K" target="_blank" rel="noopener">Ikuti saluran WhatsApp</a>
+        </div>
+      </div>
+      <div class="community-badge">
+        <span class="big">Aktif tiap hari</span>
+        <small>Member saling jual beli, tanya harga, dan info restock terbaru langsung dari sesama pemain Fisch.</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUPPORT / DONASI -->
+  <section class="wrap" id="dukungan">
+    <div class="support">
+      <div class="support-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 8V21M12 8c-1.5-3-6-3-6 0s2.5 3 6 3 6-.5 6-3-4.5-3-6 0z" stroke="#F2F2F0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><rect x="4" y="8" width="16" height="4" rx="1" stroke="#F2F2F0" stroke-width="1.6"/><rect x="5" y="12" width="14" height="9" rx="1" stroke="#F2F2F0" stroke-width="1.6"/></svg>
+      </div>
+      <h2>Lagi nonton live saya?</h2>
+      <p>Kalau kamu lagi nonton live streaming dan mau kasih dukungan, kirim langsung lewat TAKO. Setiap dukungan yang masuk bakal kebaca pas live berlangsung.</p>
+      <a class="btn btn-primary" href="https://tako.id/Nauuval/gift" target="_blank" rel="noopener">Kirim dukungan via TAKO</a>
+    </div>
+  </section>
+
+</main>
+
+<footer id="kontak">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <img src="assets/logo.png" alt="Logo Nauuvalstore" width="26" height="26" style="border-radius:6px;">
+          Nauuvalstore
+        </div>
+        <p>Joki dan kebutuhan Blox Fruits & Fisch, plus komunitas jual beli Fisch. Termurah, tercepat, terpercaya.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigasi</h4>
+        <a href="#layanan">Layanan</a><a href="katalog.html">Katalog</a>
+        <a href="#cara">Cara pesan</a>
+        <a href="#testimoni">Testimoni</a>
+        <a href="#komunitas">Komunitas</a>
+        <a href="#dukungan">Dukungan</a>
+      </div>
+      <div class="footer-col">
+        <h4>Kontak</h4>
+        <a href="https://wa.me/6289529834425" target="_blank" rel="noopener">WhatsApp Admin</a>
+        <a href="https://chat.whatsapp.com/L7OwrxjkWHoIyF4dE4O3Zf" target="_blank" rel="noopener">Grup Jual Beli Fisch</a>
+        <a href="https://whatsapp.com/channel/0029VaCkSYa8kyyHJQBMtX1K" target="_blank" rel="noopener">Saluran WhatsApp</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Nauuvalstore. Semua transaksi dilakukan atas kebijakan masing-masing pemain.</span>
+      <span>Termurah · Tercepat · Terpercaya.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const navLinks = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', isOpen);
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
+
+</body>
+</html>
+
+
+
+
