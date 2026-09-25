@@ -469,47 +469,5 @@
 
 <script src="assets/katalog.js"></script>
 
-<!-- DEBUG: Force load -->
-<script>
-  setTimeout(() => {
-    console.log("🛠️ FORCE DEBUG: katalog.html loaded");
-    if (typeof initCatalog === 'function') {
-      console.log("✅ initCatalog exists");
-    } else {
-      console.error("❌ initCatalog NOT FOUND - katalog.js mungkin tidak ter-load");
-    }
-    const grid = document.getElementById('productsGrid');
-    console.log('productsGrid exists:', !!grid);
-  }, 1000);
-</script>
-
-
-<script>
-  const menuBtn = document.getElementById('menuBtn');
-  const navLinks = document.getElementById('navLinks');
-  if(menuBtn && navLinks){
-    menuBtn.addEventListener('click', () => {
-      const isOpen = navLinks.classList.toggle('open');
-      menuBtn.setAttribute('aria-expanded', isOpen);
-    });
-    navLinks.querySelectorAll('a').forEach(a => {
-      a.addEventListener('click', () => {
-        navLinks.classList.remove('open');
-        menuBtn.setAttribute('aria-expanded', 'false');
-      });
-    });
-  }
-</script>
 <script src="assets/header-script.js"></script>`n</body>
 </html>
-
-
-
-
-
-
-
-
-
-
-

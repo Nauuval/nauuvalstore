@@ -1,6 +1,6 @@
 let allProducts = [];
 let currentFilter = "all";
-const STORAGE_KEY = "nauuval_inventory_v1";
+const STORAGE_KEY = "nauuval_inventory";
 
 const defaultProducts = [
   { kategori: "JOKI BLOX FRUIT", nama: "Joki Level 30", stok: 15, harga: 50000 },
