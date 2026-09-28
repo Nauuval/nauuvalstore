@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="id">
 <head>
 <meta charset="UTF-8">
@@ -707,7 +707,7 @@
         '<td><span class="category-tag">' + p.kategori + '</span></td>' +
         '<td><strong>' + p.nama + '</strong></td>' +
         '<td><span class="stock-badge ' + stockClass + '">' + p.stok + '</span></td>' +
-        '<td>Rp ' + p.harga.toLocaleString('id-ID') + '</td>' +
+        '<td>' + (p.harga_asli && p.harga_asli > p.harga ? '<span style="text-decoration:line-through;color:var(--ash);font-size:0.8rem;margin-right:6px;">Rp ' + p.harga_asli.toLocaleString('id-ID') + '</span>' : '') + '<strong style="color:#2ECC71;">Rp ' + p.harga.toLocaleString('id-ID') + '</strong></td>' +
         '<td class="actions">' +
           '<button class="btn btn-ghost btn-sm" onclick="openStockModal(' + p.id + ')">Stok</button>' +
           '<button class="btn btn-ghost btn-sm" onclick="editProduct(' + p.id + ')">Edit</button>' +
@@ -745,6 +745,7 @@
     document.getElementById('productCategory').value = 'JOKI BLOX FRUIT';
     document.getElementById('productName').value = '';
     document.getElementById('productStock').value = '0';
+    document.getElementById('productOriginalPrice').value = '';
     document.getElementById('productPrice').value = '';
     document.getElementById('productModal').classList.add('active');
   }
@@ -758,6 +759,7 @@
     document.getElementById('productCategory').value = product.kategori;
     document.getElementById('productName').value = product.nama;
     document.getElementById('productStock').value = product.stok;
+    document.getElementById('productOriginalPrice').value = product.harga_asli || '';
     document.getElementById('productPrice').value = product.harga;
     document.getElementById('productModal').classList.add('active');
   }
@@ -766,6 +768,7 @@
     const kategori = document.getElementById('productCategory').value;
     const nama = document.getElementById('productName').value.trim();
     const stok = parseInt(document.getElementById('productStock').value) || 0;
+    const harga_asli = parseInt(document.getElementById('productOriginalPrice').value) || null;
     const harga = parseInt(document.getElementById('productPrice').value) || 0;
     
     if (!nama) {
@@ -781,16 +784,16 @@
         if (index !== -1) {
           const res = await apiFetch(`products?id=eq.${editingId}`, {
             method: 'PATCH',
-            body: JSON.stringify({ kategori, nama, stok, harga, updated_at: new Date().toISOString() })
+            body: JSON.stringify({ kategori, nama, stok, harga_asli, harga, updated_at: new Date().toISOString() })
           });
           if (res.ok) {
-            products[index] = { ...products[index], kategori, nama, stok, harga };
+            products[index] = { ...products[index], kategori, nama, stok, harga_asli, harga };
           } else throw new Error('Gagal update cloud');
         }
       } else {
         const res = await apiFetch('products', {
           method: 'POST',
-          body: JSON.stringify({ kategori, nama, stok, harga })
+          body: JSON.stringify({ kategori, nama, stok, harga_asli, harga })
         });
         if (res.ok) {
           const inserted = await res.json();

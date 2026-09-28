@@ -414,6 +414,292 @@
     text-align: center;
     color: var(--ash);
   }
+  .qty-control{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding: 8px 12px;
+    background: var(--panel-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+  }
+  .qty-label{
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ash);
+  }
+  .qty-stepper{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .qty-btn{
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    color: var(--bone);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all .2s;
+  }
+  .qty-btn:hover{
+    background: var(--ash-dim);
+  }
+  .qty-btn:disabled{
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+  .qty-input{
+    width: 36px;
+    text-align: center;
+    background: transparent;
+    border: none;
+    color: var(--bone);
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    padding: 0;
+  }
+  .qty-input:focus{
+    outline: none;
+  }
+  .qty-input::-webkit-outer-spin-button,
+  .qty-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .qty-input[type=number] {
+    -moz-appearance: textfield;
+  }
+  /* Order Confirmation Modal */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(8, 8, 10, 0.85);
+    backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+  }
+  .modal-overlay.active {
+    display: flex;
+  }
+  .order-modal {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    width: 100%;
+    max-width: 440px;
+    overflow: hidden;
+    animation: modalPop .2s ease-out;
+  }
+  @keyframes modalPop {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .order-modal-header {
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .order-modal-header h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+  }
+  .order-modal-close {
+    background: none;
+    border: none;
+    color: var(--ash);
+    font-size: 1.5rem;
+    cursor: pointer;
+    line-height: 1;
+  }
+  .order-modal-close:hover {
+    color: var(--bone);
+  }
+  .order-modal-body {
+    padding: 24px;
+  }
+  .order-item-info {
+    background: var(--panel-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+  .order-item-category {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--ash);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .order-item-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .order-item-price {
+    color: var(--ash);
+    font-size: 0.9rem;
+  }
+  .modal-qty-section {
+    margin-bottom: 24px;
+  }
+  .modal-qty-label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--ash);
+    margin-bottom: 10px;
+  }
+  .modal-qty-picker {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .modal-qty-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius-md);
+    background: var(--panel-2);
+    border: 1px solid var(--line);
+    color: var(--bone);
+    font-size: 1.25rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .2s;
+  }
+  .modal-qty-btn:hover {
+    background: var(--ash-dim);
+  }
+  .modal-qty-input {
+    width: 60px;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    color: var(--bone);
+    padding: 8px 0;
+  }
+  .modal-calc-box {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px dashed var(--line);
+    border-radius: var(--radius-md);
+    padding: 14px 16px;
+    margin-bottom: 24px;
+  }
+  .calc-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    color: var(--ash);
+  }
+  .calc-row.total {
+    margin-bottom: 0;
+    padding-top: 8px;
+    border-top: 1px solid var(--line);
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--bone);
+  }
+  .order-modal-actions {
+    display: flex;
+    gap: 12px;
+  }
+  .btn-modal-cancel {
+    flex: 1;
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--ash);
+    padding: 14px;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+  }
+  .btn-modal-cancel:hover {
+    background: var(--panel-2);
+    color: var(--bone);
+  }
+  .btn-modal-confirm {
+    flex: 2;
+    background: #25D366;
+    border: none;
+    color: #08080A;
+    padding: 14px;
+    border-radius: var(--radius-md);
+    font-weight: 700;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: all .2s;
+  }
+  .btn-modal-confirm:hover {
+    background: #1EBE5D;
+  }
+  /* Discount & Promo Badges */
+  .product-card {
+    position: relative;
+  }
+  .discount-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: linear-gradient(135deg, #FF3366, #FF6B00);
+    color: #FFFFFF;
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 999px;
+    letter-spacing: 0.04em;
+    box-shadow: 0 4px 12px rgba(255, 51, 102, 0.4);
+    animation: discountPulse 2.5s infinite;
+  }
+  @keyframes discountPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+  .price-wrapper {
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+  .original-price {
+    font-size: 0.85rem;
+    color: var(--ash);
+    text-decoration: line-through;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .discounted-price {
+    font-family: 'Sora', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #2ECC71;
+  }
+  .discounted-price span {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ash);
+  }
 </style>
 </head>
 <body>
@@ -465,9 +751,57 @@
       </div>
     </div>
   </section>
+  <!-- Modal Konfirmasi Order -->
+  <div class="modal-overlay" id="orderModal" onclick="closeOrderModal(event)">
+    <div class="order-modal" onclick="event.stopPropagation()">
+      <div class="order-modal-header">
+        <h3>Konfirmasi Pesanan</h3>
+        <button class="order-modal-close" onclick="closeOrderModal()">&times;</button>
+      </div>
+      <div class="order-modal-body">
+        <div class="order-item-info">
+          <div class="order-item-category" id="modalCategory">-</div>
+          <div class="order-item-name" id="modalName">-</div>
+          <div class="order-item-price" id="modalPrice">Rp 0</div>
+        </div>
+
+        <div class="modal-qty-section" id="modalQtySection">
+          <label class="modal-qty-label">Pilih Jumlah Pembelian (Stok: <span id="modalStock">0</span>)</label>
+          <div class="modal-qty-picker">
+            <button type="button" class="modal-qty-btn" onclick="stepModalQty(-1)">-</button>
+            <input type="number" id="modalQtyInput" class="modal-qty-input" value="1" min="1" readonly>
+            <button type="button" class="modal-qty-btn" onclick="stepModalQty(1)">+</button>
+          </div>
+        </div>
+
+        <div class="modal-calc-box">
+          <div class="calc-row">
+            <span>Harga Satuan:</span>
+            <span id="calcUnitPrice">Rp 0</span>
+          </div>
+          <div class="calc-row" id="calcQtyRow">
+            <span>Jumlah:</span>
+            <span id="calcQtyCount">1</span>
+          </div>
+          <div class="calc-row total">
+            <span>Total Pembayaran:</span>
+            <span id="calcTotalPrice">Rp 0</span>
+          </div>
+        </div>
+
+        <div class="order-modal-actions">
+          <button class="btn-modal-cancel" onclick="closeOrderModal()">Batal</button>
+          <button class="btn-modal-confirm" onclick="confirmAndSendWA()">Lanjut ke WhatsApp</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </main>
 
 <script src="assets/katalog.js"></script>
 
 <script src="assets/header-script.js"></script>`n</body>
 </html>
+
+
+
