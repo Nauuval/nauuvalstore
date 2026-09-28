@@ -1,5 +1,6 @@
 ﻿let allProducts = [];
 let currentFilter = "all";
+let currentSearch = "";
 const STORAGE_KEY = "nauuval_inventory";
 
 const SUPABASE_URL = "https://iporesqjsbrmlhzgikdg.supabase.co";
@@ -75,6 +76,7 @@ async function initCatalog() {
   updateStockStatus();
   renderProducts();
   setupFilters();
+  setupSearch();
 }
 
 function updateStockStatus() {
@@ -88,14 +90,31 @@ function isNeedCategory(kategori) {
   return kategori.indexOf("KEBUTUHAN") !== -1;
 }
 
+function getFilteredProducts() {
+  var filteredByCat = currentFilter === "all"
+    ? allProducts
+    : allProducts.filter(function(p) { return p.kategori === currentFilter; });
+    
+  if (!currentSearch || currentSearch.trim() === "") return filteredByCat;
+  
+  var searchTerm = currentSearch.toLowerCase().trim();
+  return filteredByCat.filter(function(p) {
+    return (
+      p.nama.toLowerCase().indexOf(searchTerm) !== -1 ||
+      p.kategori.toLowerCase().indexOf(searchTerm) !== -1
+    );
+  });
+}
+
 function renderProducts() {
   var grid = document.getElementById("productsGrid");
   if (!grid) return;
-  var filtered = currentFilter === "all"
-    ? allProducts
-    : allProducts.filter(function(p) { return p.kategori === currentFilter; });
+  var filtered = getFilteredProducts();
   if (filtered.length === 0) {
-    grid.innerHTML = "<div class='loading'>Tidak ada produk di kategori ini</div>";
+    var msg = currentSearch
+      ? "<div class='loading'>Tidak ada produk yang cocok dengan '" + currentSearch + "'. Coba kata kunci lain.</div>"
+      : "<div class='loading'>Tidak ada produk di kategori ini</div>";
+    grid.innerHTML = msg;
     return;
   }
   grid.innerHTML = filtered.map(function(product) {
@@ -151,7 +170,32 @@ function setupFilters() {
   });
 }
 
-// ============= ORDER MODAL LOGIC =============
+function setupSearch() {
+  var input = document.getElementById("searchInput");
+  if (input) {
+    input.addEventListener("input", function() {
+      currentSearch = this.value;
+      renderProducts();
+    });
+    input.addEventListener("keydown", function(e) {
+      if (e.key === "Escape") {
+        this.value = "";
+        currentSearch = "";
+        renderProducts();
+      }
+    });
+  }
+}
+
+window.handleSearch = function() {
+  var input = document.getElementById("searchInput");
+  if (input) {
+    currentSearch = input.value;
+    renderProducts();
+  }
+};
+
+// ============= ORDER MODAL LOGIC (sama seperti sebelumnya) =============
 let currentOrder = null;
 
 window.openOrderModal = function(nama, harga, kategori, stok, hargaAsli) {
