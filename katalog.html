@@ -700,6 +700,38 @@
     font-weight: 600;
     color: var(--ash);
   }
+  /* Search Bar */
+  .search-container {
+    margin-bottom: 24px;
+  }
+  .search-input {
+    width: 100%;
+    background: var(--panel-2);
+    border: 1px solid var(--line);
+    color: var(--bone);
+    padding: 12px 16px;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+    transition: all .2s;
+  }
+  .search-input::placeholder {
+    color: var(--ash);
+  }
+  .search-input:focus {
+    outline: none;
+    border-color: var(--bone);
+    background: rgba(242, 242, 240, 0.05);
+  }
+  .search-input::-webkit-search-cancel-button {
+    display: none;
+  }
+  @media (max-width: 768px) {
+    .search-input {
+      padding: 10px 14px;
+      font-size: 0.95rem;
+    }
+  }
 </style>
 </head>
 <body>
@@ -732,6 +764,12 @@
     </div>
   </section>
 
+  
+    <section class="search-container">
+    <div class="wrap">
+      <input type="search" id="searchInput" class="search-input" placeholder="🔍 Cari nama produk atau layanan..." onkeyup="handleSearch()">
+    </div>
+  </section>
   <section class="filter-section">
     <div class="wrap">
       <div class="filter-tabs">
@@ -802,6 +840,7 @@
 
 <script src="assets/header-script.js"></script>`n</body>
 </html>
+
 
 
 
