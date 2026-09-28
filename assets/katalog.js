@@ -1,4 +1,4 @@
-﻿let allProducts = [];
+let allProducts = [];
 let currentFilter = "all";
 let currentSearch = "";
 const STORAGE_KEY = "nauuval_inventory";
@@ -95,14 +95,28 @@ function getFilteredProducts() {
     ? allProducts
     : allProducts.filter(function(p) { return p.kategori === currentFilter; });
     
-  if (!currentSearch || currentSearch.trim() === "") return filteredByCat;
+  if (!currentSearch || currentSearch.trim() === "") {
+    // Sort: promo di atas (harga_asli > harga)
+    return filteredByCat.sort(function(a, b) {
+      var aPromo = a.harga_asli && a.harga_asli > a.harga ? 1 : 0;
+      var bPromo = b.harga_asli && b.harga_asli > b.harga ? 1 : 0;
+      return bPromo - aPromo; // promo (1) duluan, no promo (0) belakangan
+    });
+  }
   
   var searchTerm = currentSearch.toLowerCase().trim();
-  return filteredByCat.filter(function(p) {
+  var searched = filteredByCat.filter(function(p) {
     return (
       p.nama.toLowerCase().indexOf(searchTerm) !== -1 ||
       p.kategori.toLowerCase().indexOf(searchTerm) !== -1
     );
+  });
+  
+  // Sort hasil search: promo di atas
+  return searched.sort(function(a, b) {
+    var aPromo = a.harga_asli && a.harga_asli > a.harga ? 1 : 0;
+    var bPromo = b.harga_asli && b.harga_asli > b.harga ? 1 : 0;
+    return bPromo - aPromo;
   });
 }
 
