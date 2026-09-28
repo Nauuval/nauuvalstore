@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "kategori": "JOKI BLOX FRUIT",
+    "nama": "Joki Level 30",
+    "stok": 15,
+    "harga": 50000
+  },
+  {
+    "id": 2,
+    "kategori": "JOKI BLOX FRUIT",
+    "nama": "Joki Level 50",
+    "stok": 8,
+    "harga": 120000
+  },
+  {
+    "id": 3,
+    "kategori": "JOKI BLOX FRUIT",
+    "nama": "Joki Level 100",
+    "stok": 3,
+    "harga": 350000
+  },
+  {
+    "id": 4,
+    "kategori": "JOKI FISCH",
+    "nama": "Joki Fisch Level 30",
+    "stok": 12,
+    "harga": 45000
+  },
+  {
+    "id": 5,
+    "kategori": "JOKI FISCH",
+    "nama": "Joki Fisch Level 50",
+    "stok": 6,
+    "harga": 95000
+  },
+  {
+    "id": 6,
+    "kategori": "KEBUTUHAN BLOX FRUIT",
+    "nama": "Diamond 70",
+    "stok": 25,
+    "harga": 75000
+  },
+  {
+    "id": 7,
+    "kategori": "KEBUTUHAN BLOX FRUIT",
+    "nama": "Diamond 280",
+    "stok": 18,
+    "harga": 220000
+  },
+  {
+    "id": 8,
+    "kategori": "KEBUTUHAN FISCH",
+    "nama": "Fisch Coins 50K",
+    "stok": 40,
+    "harga": 5000
+  },
+  {
+    "id": 9,
+    "kategori": "KEBUTUHAN FISCH",
+    "nama": "Fisch Coins 250K",
+    "stok": 22,
+    "harga": 18000
+  }
+]
